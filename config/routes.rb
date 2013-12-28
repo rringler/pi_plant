@@ -1,7 +1,7 @@
 PiPlant::Application.routes.draw do
 
-  resources :plant do
-    resources :sample, only: [:show, :destroy]
+  resources :plants do
+    resources :samples, only: [:show, :destroy]
   end
 
   root 'plants#index'

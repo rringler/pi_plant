@@ -1,0 +1,74 @@
+<%= form_for @plant do |f| %>
+  <% if @plant.errors.any? %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="alert alert-danger">
+          <h4><%= pluralize(@plant.errors.count, "error") %> prohibited
+                  this board from being saved:
+          </h4>
+          <ul>
+            <% @plant.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group">
+        <%= f.label :name, "Plant name" %>
+        <%= f.text_field :name,
+                         class: "form-control",
+                         placeholder: "Name",
+                         autofocus: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :signal_power_pin, "Signal Power Pin" %>
+        <% signal_power_pin_options = Array(1..26).map{ |x| [x.to_s, x] } %>
+        <%= f.select :signal_power_pin,
+                     signal_power_pin_options,
+                     class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :signal_channel, "Signal ADC Channel" %>
+        <% signal_channel_options = Array(0..7).map{ |x| [x.to_s, x] } %>
+        <%= f.select :signal_channel,
+                     signal_channel_options,
+                     class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :pump_power_pin, "Pump Power Pin" %>
+        <% pump_power_pin_options = Array(1..26).map{ |x| [x.to_s, x] } %>
+        <%= f.select :pump_power_pin,
+                     pump_power_pin_options,
+                     class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+<% end %>

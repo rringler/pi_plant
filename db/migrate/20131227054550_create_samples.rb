@@ -2,9 +2,7 @@ class CreateSamples < ActiveRecord::Migration
   def self.up
     create_table :samples do |t|
       t.integer :plant_id, null: false
-      t.decimal :temperature
-      t.decimal :humidity
-      t.integer :moisture
+      t.decimal :moisture
 
       t.timestamps
     end

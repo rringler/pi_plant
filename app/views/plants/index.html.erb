@@ -1,0 +1,11 @@
+<% if @plants.any? %>
+  <%= render partial: 'plants/plant', collection: @plants %>
+<% else %>
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>No plants are currently being monitored.</h3>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Create new plant', new_plant_path, class: 'btn btn-primary' %>

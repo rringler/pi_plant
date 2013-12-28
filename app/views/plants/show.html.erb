@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h3><%= @plant.name %></h3>
+  </div>
+  <div class="col-xs-2 col-xs-offset-4">
+    <p><%= link_to 'Edit plant', edit_plant_path(@plant),
+                              class: 'btn btn-default pull-right' %></p>
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col-xs-4">
+    <p><strong>Signal Power Pin</strong></p>
+  </div>
+  <div class="col-xs-1">
+    <p><%= @plant.signal_power_pin %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <p><strong>Signal ADC Channel</strong></p>
+  </div>
+  <div class="col-xs-1">
+    <p><%= @plant.signal_channel %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <p><strong>Pump Power Pin</strong></p>
+  </div>
+  <div class="col-xs-1">
+    <p><%= @plant.pump_power_pin %></p>
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col-xs-8">
+    <p><strong>TODO: Samples Chart</strong></p>
+  </div>
+</div>
