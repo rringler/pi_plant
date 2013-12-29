@@ -5,6 +5,7 @@ class CreatePlants < ActiveRecord::Migration
       t.integer :signal_power_pin
       t.integer :signal_channel
       t.integer :pump_power_pin
+      t.integer :moisture_threshold
 
       t.timestamps
     end
