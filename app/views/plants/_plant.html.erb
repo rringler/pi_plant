@@ -3,8 +3,12 @@
     <h2><%= link_to "#{plant.name}", plant %></h2>
   </div>
 </div>
+
 <div class="row">
-  <div class="col-xs-12">
-    <p>TODO: Insert moisture chart here.</p>
+  <div class="col-sm-6">
+    <%= high_chart("moisture_gauge_chart", plant.moisture_gauge) %>
+  </div>
+  <div class="col-sm-6">
+    <%= high_chart("moisture_histogram_chart", plant.moisture_histogram) %>
   </div>
 </div>

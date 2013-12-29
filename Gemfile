@@ -10,6 +10,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 gem 'sqlite3'
 gem 'figaro'
+gem 'draper'
+gem 'lazy_high_charts'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 1.2'

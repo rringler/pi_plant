@@ -55,7 +55,10 @@
 <hr />
 
 <div class="row">
-  <div class="col-xs-8">
-    <p><strong>TODO: Samples Chart</strong></p>
+  <div class="col-sm-6">
+    <%= high_chart("moisture_gauge_chart", @plant.moisture_gauge) %>
+  </div>
+  <div class="col-sm-6">
+    <%= high_chart("moisture_histogram_chart", @plant.moisture_histogram) %>
   </div>
 </div>
