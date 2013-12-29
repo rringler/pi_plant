@@ -1,10 +1,16 @@
 <div class="row">
   <div class="col-xs-6">
-    <h3><%= @plant.name %></h3>
+    <h2><%= @plant.name %></h2>
   </div>
-  <div class="col-xs-2 col-xs-offset-4">
-    <p><%= link_to 'Edit plant', edit_plant_path(@plant),
-                              class: 'btn btn-default pull-right' %></p>
+  <div class="col-xs-3 col-xs-offset-3">
+    <p class="pull-right">
+      <%= link_to 'Edit', edit_plant_path(@plant),
+                          class: 'btn btn-default' %>
+      <%= link_to 'Delete', @plant,
+                            method: :delete,
+                            confirm: 'Are you sure?',
+                            class: 'btn btn-danger' %>
+    </p>
   </div>
 </div>
 
@@ -34,6 +40,15 @@
   </div>
   <div class="col-xs-1">
     <p><%= @plant.pump_power_pin %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <p><strong>Moisture Threshold</strong></p>
+  </div>
+  <div class="col-xs-1">
+    <p><%= @plant.moisture_threshold %>%</p>
   </div>
 </div>
 
