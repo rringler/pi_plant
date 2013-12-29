@@ -13,9 +13,9 @@
     <%= render 'layouts/navbar' %>
 
     <main class="container">
+      <% render 'layouts/flash' %>
 
       <%= yield %>
-
     </main>
 
   <%= debug(params) unless Rails.env.production? %>
