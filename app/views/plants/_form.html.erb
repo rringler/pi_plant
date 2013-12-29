@@ -67,7 +67,18 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
+        <%= f.label :moisture_threshold, "Moisture Threshold" %>
+        <%= f.range_field :moisture_threshold, min: 0, max: 100, step: 5 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <%= link_to 'Cancel', new_plant_path, class: 'btn btn-default',
+                                              remote: true %>
       </div>
     </div>
   </div>

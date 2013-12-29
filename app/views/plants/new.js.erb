@@ -1,0 +1,7 @@
+if ($('div#new_plant_form').html() == '') {
+  $('div#new_plant_form').html("<%= j render partial: 'plants/form' %>");
+  $('a#new_plant_link').hide()
+} else {
+  $('div#new_plant_form').html('');
+  $('a#new_plant_link').show();
+}

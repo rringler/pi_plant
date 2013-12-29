@@ -1,6 +1,11 @@
 class PlantsController < ApplicationController
   def new
     @plant = Plant.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -38,6 +43,8 @@ class PlantsController < ApplicationController
   def destroy
     @plant = Plant.where(id: params[:id]).first
     @plant.destroy
+
+    redirect_to root_path
   end
 
   private
@@ -46,6 +53,7 @@ class PlantsController < ApplicationController
     params.require(:plant).permit(:name,
                                   :signal_power_pin,
                                   :signal_channel,
-                                  :pump_power_pin)
+                                  :pump_power_pin,
+                                  :moisture_threshold)
   end
 end

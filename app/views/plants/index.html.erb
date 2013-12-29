@@ -8,4 +8,10 @@
   </div>
 <% end %>
 
-<%= link_to 'Create new plant', new_plant_path, class: 'btn btn-primary' %>
+<hr />
+
+<%= link_to 'Create new plant', new_plant_path, id: "new_plant_link",
+                                                class: 'btn btn-primary',
+                                                remote: true %>
+
+<div id="new_plant_form"></div>
