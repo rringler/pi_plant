@@ -12,18 +12,18 @@ class PlantsController < ApplicationController
     @plant = Plant.new(plant_params)
 
     if @plant.save
-      redirect_to @plant, flash: { success: "New plant created!" }
+      redirect_to root_path, flash: { success: "New plant created!" }
     else
       render 'new'
     end
   end
 
   def index
-    @plants = Plant.all
+    @plants = Plant.all.decorate
   end
 
   def show
-    @plant = Plant.where(id: params[:id]).first
+    @plant = Plant.where(id: params[:id]).first.decorate
   end
 
   def edit
