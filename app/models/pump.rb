@@ -1,4 +1,10 @@
 class Pump
+  if Rails.env.production?
+    require 'pi_piper'
+  else
+    require "#{::Rails.root}/spec/support/pi_piper_mock"
+  end
+
   def initialize(options)
     raise "Invalid power pin.  The power pin must be one of the 26 GPIO pins "\
           "on the Raspberry Pi" unless (1..26).cover?(options[:power_pin])

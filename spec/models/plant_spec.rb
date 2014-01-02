@@ -1,5 +1,15 @@
 require 'spec_helper'
 
 describe Plant do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'should have valid factories' do
+    FactoryGirl.create(:plant).should be_valid
+  end
+
+  describe 'validations' do
+    describe 'name' do
+      it 'should be present' do
+        FactoryGirl.build(:plant, name: nil).should_not be_valid
+      end
+    end
+  end
 end

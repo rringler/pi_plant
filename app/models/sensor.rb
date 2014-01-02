@@ -1,5 +1,11 @@
 class Sensor
-  MIN_SENSOR_READING = 0    # 10-bit limit.  Need to measure these.
+  if Rails.env.production?
+    require 'pi_piper'
+  else
+    require "#{::Rails.root}/spec/support/pi_piper_mock"
+  end
+
+  MIN_SENSOR_READING =    0 # 10-bit limit.  Need to measure these.
   MAX_SENSOR_READING = 1024 # 10-bit limit.  Need to measure these.
 
   def initialize(options)
