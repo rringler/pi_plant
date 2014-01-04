@@ -3,8 +3,9 @@
 FactoryGirl.define do
   factory :plant do
     name             "Random House Plant"
-    signal_power_pin 16
-    signal_channel    0
-    pump_power_pin   24
+    signal_power_pin   16
+    signal_channel      0
+    pump_power_pin     24
+    moisture_threshold 65
   end
 end
