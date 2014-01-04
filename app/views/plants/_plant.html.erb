@@ -6,9 +6,9 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <%= high_chart("moisture_gauge_chart", plant.moisture_gauge) %>
+    <%= high_chart("plant_#{plant.id}_gauge_chart", plant.moisture_gauge) %>
   </div>
   <div class="col-sm-6">
-    <%= high_chart("moisture_histogram_chart", plant.moisture_histogram) %>
+    <%= high_chart("plant_#{plant.id}_histogram_chart", plant.moisture_histogram) %>
   </div>
 </div>
