@@ -9,13 +9,13 @@ class Sensor
   MAX_SENSOR_READING = 1024 # 10-bit limit.  Need to measure these.
 
   def initialize(options)
-    raise "Invalid power pin.  The power pin must be one of the 26 GPIO pins "\
+    raise "Invalid power pin. The power pin must be one of the 26 GPIO pins "\
           "on the Raspberry Pi" unless (1..26).cover?(options[:power_pin])
-    raise "Invalid signal channel.  The signal channel must be "\
+    raise "Invalid signal channel. The signal channel must be "\
           "between 0 and 7." unless (0..7).cover?(options[:adc_channel])
 
-    @power_pin = PiPiper::Pin.new(pin: options[:power_pin], direction: :out)
-    @adc_channel   = options[:adc_channel]
+    @power_pin   = PiPiper::Pin.new(pin: options[:power_pin], direction: :out)
+    @adc_channel = options[:adc_channel]
 
     off
   end
@@ -31,7 +31,6 @@ class Sensor
     end
 
     off
-
     normalize(value)
   end
 
