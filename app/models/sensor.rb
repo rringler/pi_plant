@@ -37,7 +37,7 @@ class Sensor
     raw_samples = Array(1..30).map{sleep 0.1; read}
 
     off
-    raw_samples.reduce(:+)/raw_samples.size
+    raw_samples.reduce(:+)/raw_samples.size # Find the average of the 30 samples
   end
 
   private
@@ -58,8 +58,6 @@ class Sensor
       raw = spi.write [1, (8+@adc_channel)<<4, 0] # bit pattern defined in MCP3008 datasheet
       value = ((raw[1]&3) << 8) + raw[2]          # bit pattern defined in MCP3008 datasheet
     end
-
-    puts value.class
 
     percentile(value)
   end
