@@ -32,7 +32,7 @@
     <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :signal_power_pin, "Signal Power Pin" %>
-        <% signal_power_pin_options = Array(1..26).map{ |x| [x.to_s, x] } %>
+        <% signal_power_pin_options = [4, 17, 18, 22, 23, 24, 25, 27] %>
         <%= f.select :signal_power_pin,
                      signal_power_pin_options,
                      class: "form-control" %>
@@ -56,7 +56,7 @@
     <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :pump_power_pin, "Pump Power Pin" %>
-        <% pump_power_pin_options = Array(1..26).map{ |x| [x.to_s, x] } %>
+        <% pump_power_pin_options = [4, 17, 18, 22, 23, 24, 25, 27] %>
         <%= f.select :pump_power_pin,
                      pump_power_pin_options,
                      class: "form-control" %>
@@ -68,7 +68,7 @@
     <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :moisture_threshold, "Moisture Threshold" %>
-        <%= f.range_field :moisture_threshold, min: 0, max: 1, step: 0.05 %>
+        <%= f.range_field :moisture_threshold, min: 0, max: 100, step: 5 %>
       </div>
     </div>
   </div>
