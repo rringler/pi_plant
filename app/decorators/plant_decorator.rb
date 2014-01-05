@@ -70,7 +70,6 @@ class PlantDecorator < Draper::Decorator
                type: 'line',
                data: object.samples
                            .recent
-                           .all
                            .map {|x| [js_date(x.created_at), x.moisture] },
                tooltip: { useHTML: true,
                           xDateFormat: '%a, %e-%b',
