@@ -10,7 +10,7 @@ class Sensor
 
   def initialize(options)
     raise "Invalid power pin. The power pin must be one of the 26 GPIO pins "\
-          "on the Raspberry Pi" unless (1..26).cover?(options[:power_pin])
+          "on the Raspberry Pi" unless [4, 17, 18, 22, 23, 24, 25, 27].cover?(options[:power_pin])
     raise "Invalid signal channel. The signal channel must be "\
           "between 0 and 7." unless (0..7).cover?(options[:adc_channel])
 

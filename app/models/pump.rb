@@ -7,7 +7,7 @@ class Pump
 
   def initialize(options)
     raise "Invalid power pin.  The power pin must be one of the 26 GPIO pins "\
-          "on the Raspberry Pi" unless (1..26).cover?(options[:power_pin])
+          "on the Raspberry Pi" unless [4, 17, 18, 22, 23, 24, 25, 27].include?(options[:power_pin])
 
     @power_pin = PiPiper::Pin.new(pin: options[:power_pin], direction: :out)
 
