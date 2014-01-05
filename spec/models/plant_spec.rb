@@ -35,4 +35,31 @@ describe Plant do
       FactoryGirl.build(:plant2, pump_power_pin: 4).should_not be_valid
     end
   end
+
+  describe 'instance methods' do
+    let(:plant) { FactoryGirl.create(:plant, moisture_threshold: 50) }
+
+    context '#check_moisture_and_water_if_necessary' do
+      it 'should turn on the pump if the moisture is below the threshold' do
+        Sensor.any_instance.should_receive(:measure).and_return(45)
+        Pump.any_instance.should_receive(:irrigate)
+
+        plant.check_moisture_and_water_if_necessary
+      end
+
+      it 'should not turn on the pump if the moisture is above the threshold' do
+        Sensor.any_instance.should_receive(:measure).and_return(55)
+        Pump.any_instance.should_not_receive(:irrigate)
+
+        plant.check_moisture_and_water_if_necessary
+      end
+
+      it 'should save the moisture sample' do
+        Sensor.any_instance.should_receive(:measure).and_return(45)
+        Pump.any_instance.should_receive(:irrigate)
+
+        expect { plant.check_moisture_and_water_if_necessary }.to change(Sample, :count).by(1)
+      end
+    end
+  end
 end
