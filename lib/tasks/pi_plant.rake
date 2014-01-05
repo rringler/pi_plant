@@ -5,8 +5,8 @@ task :sample => :environment do
     sensor = Sensor.new(power_pin:   plant.signal_power_pin,
                         adc_channel: plant.signal_channel)
 
-    moisture = sensor.read
-    pump.water_for(5) if moisture < plant.moisture_threshold
+    moisture = sensor.measure
+    pump.irrigate if moisture < plant.moisture_threshold
 
     plant.sample.create(moisture: moisture).save  # Save the sample
   end
