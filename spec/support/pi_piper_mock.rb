@@ -11,7 +11,6 @@ module PiPiper
 
   class Spi
     def self.begin(*args, &block)
-
     end
   end
 end

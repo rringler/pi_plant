@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'plants#index' do
   context 'with previously created plants' do
     let(:plant1) { FactoryGirl.create(:plant) }
-    let(:plant2) { FactoryGirl.create(:plant) }
+    let(:plant2) { FactoryGirl.create(:plant2) }
 
     before(:each) do
       (0..30).each do |t|

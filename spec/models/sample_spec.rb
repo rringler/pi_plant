@@ -1,10 +1,16 @@
 require 'spec_helper'
 
 describe Sample do
-  it 'should have valid factories' do
-    FactoryGirl.create(:sample).should be_valid
-    FactoryGirl.create(:dry_sample).should be_valid
-    FactoryGirl.create(:wet_sample).should be_valid
+  context 'factories' do
+    it 'should have a valid default factory' do
+      FactoryGirl.create(:sample).should be_valid
+    end
+    it 'should have a valid dry_sample factory' do
+      FactoryGirl.create(:dry_sample).should be_valid
+    end
+    it 'should have a valid wet_sample factory' do
+      FactoryGirl.create(:wet_sample).should be_valid
+    end
   end
 
   describe 'validations' do
