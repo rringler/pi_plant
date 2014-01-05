@@ -33,8 +33,5 @@ group :test do
 end
 
 group :production do
-  # Using fork until Pull Request #15 or #17 are merged fixing the SPI calls
-  # to use Platform.driver
-  gem 'pi_piper', github: 'bguest/pi_piper',
-                  branch: 'stub-driver'
+  gem 'pi_piper'
 end
