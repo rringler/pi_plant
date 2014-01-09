@@ -63,6 +63,9 @@ class Sensor
   end
 
   def percentile(value)
-    ((value - @min_sensor_reading) * 100.0 / @max_sensor_reading).round
+    dynamic_range  = @max_sensor_reading - @min_sensor_reading
+    adjusted_input = value - @min_sensor_reading
+
+    100 - ((adjusted_input / dynamic_range.to_f) * 100).round
   end
 end
