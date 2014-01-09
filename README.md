@@ -1,5 +1,7 @@
 # pi_plant
 
+![pi_plant screenshot](https://raw.github.com/rringler/pi_plant/master/public/images/screenshot.png "pi_plant screenshot")
+
 
 ## Overview
 (Long) weekend project to monitor and water my plant with a Raspberry Pi.  The
