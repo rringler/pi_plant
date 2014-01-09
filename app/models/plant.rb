@@ -21,7 +21,10 @@ class Plant < ActiveRecord::Base
   end
 
   def sensor
+    # Min/max sensors readings measured with a sunkee Soil Hygrometer
     @sensor ||= Sensor.new(power_pin:   signal_power_pin,
-                           adc_channel: signal_channel)
+                           adc_channel: signal_channel,
+                           max_sensor_reading: 830,
+                           min_sensor_reading: 180)
   end
 end
