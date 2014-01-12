@@ -8,7 +8,7 @@
                           class: 'btn btn-default' %>
       <%= link_to 'Delete', @plant,
                             method: :delete,
-                            confirm: 'Are you sure?',
+                            data: { confirm: 'Are you sure?' },
                             class: 'btn btn-danger' %>
     </p>
   </div>
