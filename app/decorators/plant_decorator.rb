@@ -42,7 +42,7 @@ class PlantDecorator < Draper::Decorator
                             outerRadius: '105%' }],
               pane: 0)
       f.series(name: 'Moisture',
-               data: [object.samples.most_recent.first.moisture],
+               data: [object.samples.most_recent.moisture],
                tooltip: { valueSuffix: ' %' })
     end
   end
