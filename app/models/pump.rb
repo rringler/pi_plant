@@ -5,7 +5,8 @@ class Pump
     require "#{::Rails.root}/spec/support/pi_piper_mock"
   end
 
-  VALID_GPIO_PINS    = [4, 17, 18, 22, 23, 24, 25, 27]
+  VALID_GPIO_PINS         = [4, 17, 18, 22, 23, 24, 25, 27]
+  DEFAULT_IRRIGATION_TIME = 7 # seconds
 
   def initialize(options)
     raise "Invalid power pin. The power pin must be one of "\
@@ -15,7 +16,7 @@ class Pump
           "0 and 30 seconds." unless (0..30).cover?(options[:water_for].to_i)
 
     @power_pin = PiPiper::Pin.new(pin: options[:power_pin], direction: :out)
-    @water_for_duration = options[:water_for] || 7
+    @water_for_duration = options[:water_for] || DEFAULT_IRRIGATION_TIME
 
     off
   end

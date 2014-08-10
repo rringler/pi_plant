@@ -1,5 +1,5 @@
 class Sample < ActiveRecord::Base
-  require 'NullSample'
+  require 'nullsample.rb'
 
   belongs_to :plant
 
