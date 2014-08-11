@@ -53,11 +53,11 @@ documentation for more details) and add it to your `.gitignore` file.
    RAILS_SECRET_KEY_BASE: '<rails secret key>'
    ```
 
-3. Schedule the pi_plant:sample rake task to take periodic soil measurements.
+3. Schedule the `sample` rake task to take periodic soil measurements.
 
    ```ruby
    crontab -e
-   00 00, 12, * * * * rvmsudo /path/to/rake RAILS_ENV=production pi_plant:sample
+   00 00, 12, * * * * rvmsudo rake RAILS_ENV=production sample
    ```
    Note: the Pi requires root access to interact with hardware
 
