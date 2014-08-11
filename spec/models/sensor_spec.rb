@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Sensor do
   describe 'instance methods' do
@@ -10,7 +10,7 @@ describe Sensor do
       end
 
       it 'should turn the sensor off after initializing' do
-        Sensor.any_instance.should_receive(:off)
+        expect_any_instance_of(Sensor).to receive(:off)
         Sensor.new(power_pin: 18, adc_channel: 0)
       end
     end
@@ -23,15 +23,15 @@ describe Sensor do
          'take a measurement, '\
          'turn the sensor off, '\
          'and normalize the data' do
-        sensor.should_receive(:on)
-        sensor.should_receive(:sleep).with(0.4)
+        expect(sensor).to receive(:on)
+        expect(sensor).to receive(:sleep).with(0.4)
 
         30.times do
-          sensor.should_receive(:sleep).with(0.1)
-          sensor.should_receive(:read).and_return(Kernel.rand(1024))
+          expect(sensor).to receive(:sleep).with(0.1)
+          expect(sensor).to receive(:read).and_return(Kernel.rand(1024))
         end
 
-        sensor.should_receive(:off)
+        expect(sensor).to receive(:off)
 
         sensor.measure
       end
