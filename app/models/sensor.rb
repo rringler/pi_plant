@@ -1,71 +1,124 @@
 class Sensor
-  if Rails.env.production?
-    require 'pi_piper'
-  else
-    require "#{::Rails.root}/spec/support/pi_piper_mock"
-  end
+  require Rails.env.test? ? "#{::Rails.root}/spec/support/pi_piper_mock" : "pi_piper"
 
   VALID_GPIO_PINS    = [4, 17, 18, 22, 23, 24, 25, 27]
-  VALID_ADC_CHANNELS = [0, 1, 2, 3, 4, 5, 6, 7]
+  VALID_ADC_CHANNELS = [0, 1]
+  VALID_SENSOR_RANGE = (0..1023)
 
-  def initialize(options)
-    raise "Invalid power pin. The power pin must be one of "\
-          "the Raspberry Pi's GPIO pins: "\
-          "#{VALID_GPIO_PINS}" unless VALID_GPIO_PINS.include?(options[:power_pin])
-    raise "Invalid signal channel. The signal channel must be one of "\
-          "the MCP3008's valid ADC channels: "\
-          "#{VALID_ADC_CHANNELS}" unless VALID_ADC_CHANNELS.include?(options[:adc_channel])
-    raise "Invalid minimum sensor value.  Value must be between "\
-          "0 and 1023." unless (0..1023).cover?(options[:min_sensor_reading].to_i)
-    raise "Invalid maximum sensor value.  Value must be between "\
-          "0 and 1023." unless (0..1023).cover?(options[:max_sensor_reading].to_i)
+  attr_reader :adc_channel,
+              :samples,
+              :sensor_max,
+              :sensor_min,
+              :power_pin
 
-    @power_pin   = PiPiper::Pin.new(pin: options[:power_pin], direction: :out)
-    @adc_channel = options[:adc_channel]
+  def initialize(power_pin:, adc_channel:, sensor_min: 0, sensor_max: 1023)
+    raise invalid_power_pin_error        unless VALID_GPIO_PINS.include?(power_pin)
+    raise invalid_signal_pin_error       unless VALID_ADC_CHANNELS.include?(adc_channel)
+    raise invalid_min_sensor_value_error unless VALID_SENSOR_RANGE.cover?(sensor_min)
+    raise invalid_max_sensor_value_error unless VALID_SENSOR_RANGE.cover?(sensor_max)
 
-    @min_sensor_reading = options[:min_sensor_reading] ||    0 # 10-bit theoretical limit
-    @max_sensor_reading = options[:max_sensor_reading] || 1023 # 10-bit theoretical limit
+    @power_pin   = output_pin(power_pin)
+    @adc_channel = adc_channel
+    @sensor_max  = sensor_max
+    @sensor_min  = sensor_min
 
     off
   end
 
   def measure
-    on
-    sleep 0.4 # Delay for the sensor to initialize
+    on do
+      sleep(0.4) # Delay for the sensor to initialize
 
-    # The MCP3008 isn't perfect, so we'll take 30 samples
-    raw_samples = Array(1..30).map{sleep 0.1; read}
+      @samples = sample(number: 30, delay: 0.1) # Grab multiple samples to average
+    end
 
-    off
-    raw_samples.reduce(:+)/raw_samples.size # Find the average of the 30 samples
+    samples.map { |s| normalized(s) } # Map to a normalized value: 0 - 100
+           .reduce(:+)                 # Sum the normalized values
+           ./(samples.size.to_f)       # Divide by the number of samples
   end
 
   private
 
-  def on
-    @power_pin.on
+  def dynamic_range
+    sensor_max - sensor_min
+  end
+
+  def invalid_power_pin_error
+    ArgumentError.new(
+      "Invalid power pin. The power pin must be one of the Raspberry Pi's "    \
+      "GPIO pins: #{VALID_GPIO_PINS}"
+    )
+  end
+
+  def invalid_signal_pin_error
+    ArgumentError.new(
+      "Invalid signal channel. The signal channel must be one of the "         \
+      "MCP3002's valid ADC channels: #{VALID_ADC_CHANNELS}"
+    )
+  end
+
+  def invalid_max_sensor_value_error
+    ArgumentError.new(
+      "Invalid maximum sensor value.  Value must be between 0 and 1023."
+    )
+  end
+
+  def invalid_min_sensor_value_error
+    ArgumentError.new(
+      "Invalid minimum sensor value.  Value must be between 0 and 1023."
+    )
+  end
+
+  def mcp3002_input_bytes
+    start     = 0b01000000
+    sgl       = 0b00100000
+    msbf      = 0b00001000
+    adc       = adc_channel << 4 # 0: 0b00000000, 1: 0b00010000
+    dont_care = 0b00000000
+
+    [
+      (start | sgl | msbf | adc),
+      dont_care
+    ]
+  end
+
+  def measurable(raw)
+    value = [  raw, sensor_max].min
+    value = [value, sensor_min].max
+    value
+  end
+
+  def normalized(value)
+    (((measurable(value) - sensor_min) / dynamic_range.to_f) * 100).round
   end
 
   def off
-    @power_pin.off
+    power_pin.off
+  end
+
+  def on
+    power_pin.on
+
+    if block_given?
+      yield power_pin
+      power_pin.off
+    end
+  end
+
+  def output_pin(pin)
+    PiPiper::Pin.new(pin: pin, direction: :out)
   end
 
   def read
-    value = 0
-    raw = [0, 0, 1127] # Set greater than 1024 just in case SPI comms fails
+    # The MCP3002 returns ten bits of precision, split over two bytes
+    byte1, byte2 = PiPiper::Spi.begin { |spi| spi.write(mcp3002_input_bytes) }
 
-    PiPiper::Spi.begin do |spi|
-      raw = spi.write [1, (8+@adc_channel)<<4, 0] # bit pattern defined in MCP3008 datasheet
-      value = ((raw[1]&3) << 8) + raw[2]          # bit pattern defined in MCP3008 datasheet
-    end
-
-    percentile(value)
+    ((byte1 & 3) << 8) + byte2 # Select the first two bits of byte1 by
+                               # bitwise-and(3) and left-shift by eight bits.
+                               # Then add the value of byte2
   end
 
-  def percentile(value)
-    dynamic_range  = @max_sensor_reading - @min_sensor_reading
-    adjusted_input = value - @min_sensor_reading
-
-    100 - ((adjusted_input / dynamic_range.to_f) * 100).round
+  def sample(number: 1, delay: 0)
+    (1..number).map { sleep(delay); read }
   end
 end

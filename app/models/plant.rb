@@ -1,30 +1,47 @@
 class Plant < ActiveRecord::Base
   has_many :samples
 
-  validates :name, presence: true
-  validates :signal_channel, uniqueness: true
-  validates :signal_power_pin, uniqueness: true
-  validates :pump_power_pin, uniqueness: true
+  validates_presence_of   :name
+  validates_uniqueness_of :signal_channel,
+                          :signal_power_pin,
+                          :pump_power_pin
 
+  DEFAULT_MAX_SENSOR = 830 # Measured with a sunkee soil hygrometer
+  DEFAULT_MIN_SENSOR = 180 # Measured with a sunkee soil hygrometer
 
   def check_moisture_and_water_if_necessary
-    moisture = sensor.measure
-
-    pump.irrigate if moisture < moisture_threshold
-    samples.create(moisture: moisture).save
+    irrigate if needs_watering?
+    record_sample
   end
 
   private
+
+  def irrigate
+    pump.irrigate
+  end
+
+  def moisture_level
+    @moisture_level ||= sensor.measure
+  end
+
+  def needs_watering?
+    moisture_level < moisture_threshold
+  end
 
   def pump
     @pump ||= Pump.new(power_pin: pump_power_pin)
   end
 
-  def sensor
-    # Min/max sensors readings measured with a sunkee Soil Hygrometer
-    @sensor ||= Sensor.new(power_pin:   signal_power_pin,
-                           adc_channel: signal_channel,
-                           max_sensor_reading: 830,
-                           min_sensor_reading: 180)
+  def record_sample
+    samples.create!(moisture: moisture)
+  end
+
+  def sensor(sensor_max: DEFAULT_MAX_SENSOR, sensor_min: DEFAULT_MIN_SENSOR)
+    @sensor ||= Sensor.new(
+      power_pin: signal_power_pin,
+      adc_channel: signal_channel,
+      sensor_max: sensor_max,
+      sensor_min: sensor_min
+    )
   end
 end
