@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.1.1'
 
 gem 'rails'
 gem 'jquery-rails'
@@ -17,7 +17,7 @@ gem 'lazy_high_charts'
 # gem 'jbuilder', '~> 1.2'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.4.0'
   gem 'factory_girl_rails'
   gem 'terminal-notifier-guard'
   gem 'launchy'
@@ -30,6 +30,8 @@ group :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'rb-fsevent'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :production do
