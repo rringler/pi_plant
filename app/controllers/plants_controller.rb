@@ -19,19 +19,19 @@ class PlantsController < ApplicationController
   end
 
   def index
-    @plants = Plant.all.decorate
+    @plants = plants
   end
 
   def show
-    @plant = Plant.where(id: params[:id]).first.decorate
+    @plant = plant
   end
 
   def edit
-    @plant = Plant.where(id: params[:id]).first
+    @plant = plant
   end
 
   def update
-    @plant = Plant.where(id: params[:id]).first
+    @plant = plant
 
     if @plant.update_attributes(plant_params)
       redirect_to @plant, flash: { success: "Plant updated." }
@@ -41,7 +41,7 @@ class PlantsController < ApplicationController
   end
 
   def destroy
-    @plant = Plant.where(id: params[:id]).first
+    @plant = plant
     @plant.destroy
 
     redirect_to root_path
@@ -49,11 +49,20 @@ class PlantsController < ApplicationController
 
   private
 
+  def plant
+    @plant ||= Plant.find(params[:id])
+  end
+
+  def plants
+    @plants ||= Plant.all.decorate
+  end
+
   def plant_params
-    params.require(:plant).permit(:name,
-                                  :signal_power_pin,
-                                  :signal_channel,
-                                  :pump_power_pin,
-                                  :moisture_threshold)
+    params.require(:plant)
+          .permit(:name,
+                  :signal_power_pin,
+                  :signal_channel,
+                  :pump_power_pin,
+                  :moisture_threshold)
   end
 end
