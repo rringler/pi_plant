@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/Users/rringler/Desktop/MCP3002/MCP3002.sch</source>
+    <date>Wednesday, December 23, 2015 'PMt' 09:48:29 PM</date>
+    <tool>Eeschema 4.0.1-stable</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>MCP3002.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>MCP3002</value>
+      <footprint>Housings_DIP:DIP-8_W7.62mm</footprint>
+      <libsource lib="mcp3002" part="MCP3002"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B7F13</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>2N3904</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Molded_Narrow</footprint>
+      <libsource lib="device" part="Q_NPN_EBC"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B7FAC</tstamp>
+    </comp>
+    <comp ref="P2">
+      <value>CONN_01X02</value>
+      <footprint>Pin_Headers:Pin_Header_Angled_1x02</footprint>
+      <libsource lib="conn" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B800D</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>CONN_01X05</value>
+      <footprint>Pin_Headers:Pin_Header_Angled_1x05</footprint>
+      <libsource lib="conn" part="CONN_01X05"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B8093</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>1K</value>
+      <footprint>Resistors_ThroughHole:Resistor_TO-220_Vertical</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B84F5</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>CONN_01X03</value>
+      <footprint>Pin_Headers:Pin_Header_Angled_1x03</footprint>
+      <libsource lib="conn" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B8F75</tstamp>
+    </comp>
+    <comp ref="P4">
+      <value>CONN_01X03</value>
+      <footprint>Pin_Headers:Pin_Header_Angled_1x03</footprint>
+      <libsource lib="conn" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>567B8FB9</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="conn" part="CONN_01X02">
+      <description>Connector 01x02</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X02</fp>
+        <fp>Pin_Header_Angled_1X02</fp>
+        <fp>Socket_Strip_Straight_1X02</fp>
+        <fp>Socket_Strip_Angled_1X02</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X03">
+      <description>Connector 01x03</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X03</fp>
+        <fp>Pin_Header_Angled_1X03</fp>
+        <fp>Socket_Strip_Straight_1X03</fp>
+        <fp>Socket_Strip_Angled_1X03</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X05">
+      <description>Connector 01x05</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X05</fp>
+        <fp>Pin_Header_Angled_1X05</fp>
+        <fp>Socket_Strip_Straight_1X05</fp>
+        <fp>Socket_Strip_Angled_1X05</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X05</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="mcp3002" part="MCP3002">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP3002</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~CS" type="input"/>
+        <pin num="2" name="CH0" type="input"/>
+        <pin num="3" name="CH1" type="input"/>
+        <pin num="4" name="VSS" type="input"/>
+        <pin num="5" name="DIN" type="input"/>
+        <pin num="6" name="DOUT" type="input"/>
+        <pin num="7" name="CLK" type="input"/>
+        <pin num="8" name="VDD" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="Q_NPN_EBC">
+      <description>Transistor NPN (general)</description>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">Q_NPN_EBC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="E" type="passive"/>
+        <pin num="2" name="B" type="passive"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+        <fp>Resistor_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="conn">
+      <uri>/Library/Application Support/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="mcp3002">
+      <uri>/Users/rringler/Desktop/MCP3002/mcp3002.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>/Library/Application Support/kicad/library/device.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(P1-Pad3)">
+      <node ref="U1" pin="6"/>
+      <node ref="P1" pin="3"/>
+    </net>
+    <net code="2" name="Net-(P1-Pad4)">
+      <node ref="U1" pin="7"/>
+      <node ref="P1" pin="4"/>
+    </net>
+    <net code="3" name="Net-(Q1-Pad2)">
+      <node ref="R1" pin="1"/>
+      <node ref="Q1" pin="2"/>
+    </net>
+    <net code="4" name="Net-(P1-Pad5)">
+      <node ref="P1" pin="5"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="5" name="VCC">
+      <node ref="P3" pin="1"/>
+      <node ref="P4" pin="1"/>
+      <node ref="Q1" pin="3"/>
+      <node ref="P2" pin="1"/>
+    </net>
+    <net code="6" name="GND">
+      <node ref="U1" pin="4"/>
+      <node ref="P3" pin="3"/>
+      <node ref="P4" pin="3"/>
+      <node ref="P2" pin="2"/>
+    </net>
+    <net code="7" name="Net-(P3-Pad2)">
+      <node ref="P3" pin="2"/>
+      <node ref="U1" pin="2"/>
+    </net>
+    <net code="8" name="Net-(P4-Pad2)">
+      <node ref="P4" pin="2"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="9" name="Net-(Q1-Pad1)">
+      <node ref="Q1" pin="1"/>
+      <node ref="U1" pin="8"/>
+    </net>
+    <net code="10" name="Net-(P1-Pad2)">
+      <node ref="P1" pin="2"/>
+      <node ref="U1" pin="5"/>
+    </net>
+    <net code="11" name="Net-(P1-Pad1)">
+      <node ref="P1" pin="1"/>
+      <node ref="U1" pin="1"/>
+    </net>
+  </nets>
+</export>
