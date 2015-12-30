@@ -75,6 +75,22 @@ documentation for more details) and add it to your `.gitignore` file.
 5. Create a plant with the GPIO pins used in your circuit.
 
 
+## Bill of Materials
+| Find No. | Qty | Part Number    | Description | Approx. Extended Cost |
+|---------:|----:|:---------------|:------------|----------------------:|
+| 1        |   1 | 756-8308       | [Raspberry Pi v2](https://www.adafruit.com/products/2358) | $40 |
+| 2        |   1 | SDC10/8GBET    | [Kingston 8GB microSD Card](http://www.amazon.com/gp/product/B008EODGHS) | $8 |
+| 3        |   1 | EW-7811Un      | [Edimax 802.11n USB Adapter](http://www.amazon.com/gp/product/B003MTTJOY) | $10 |
+| 4        |   1 | B00E0NTPP4     | [SunFounder 2 Channel 5V Relay Shield for Arduino](http://www.amazon.com/SunFounder-Channel-Shield-Arduino-Raspberry/dp/B00E0NTPP4/) | $7 |
+| 5        |   1 | B00AYCNEKW     | [sunkee Soil Moisture Sensor](http://www.amazon.com/gp/product/B00AYCNEKW) | $3 |
+| 6        |   1 | B001BOD9JI     | [TOM 3.5gph Aquarium Pump](http://www.amazon.com/gp/product/B001BOD9JI) | $16 |
+| 7        |   1 | kTJJCOss       | [OSH Park Custom PCB](https://oshpark.com/shared_projects/kTJJCOss) | $8 |
+| 8        |   1 | MCP3002-I/P    | [MCP3002 2-Channel 10-bit ADC](http://www.digikey.com/scripts/DkSearch/dksus.dll?Detail&itemSeq=186693142&uq=635870217430541403) | $2 |
+| 9        |   3 | 2N3904BU       | [40V NPN Transistor](http://www.digikey.com/scripts/DkSearch/dksus.dll?Detail&itemSeq=186700114&uq=635870217430551404) | $1 |
+| 10       |   3 | CF14JT1K00     | [1kOhm 1/4W Carbon Through Hole Resistor](http://www.digikey.com/scripts/DkSearch/dksus.dll?Detail&itemSeq=186693725&uq=635870217430551404) | $1 |
+| 11       |   2 | 0022288363     | [Molex 36pos Right-Angle Pin Header](http://www.digikey.com/scripts/DkSearch/dksus.dll?Detail&itemSeq=186693603&uq=635870217430541403) | $4 |
+
+
 ## TODO
  - [X] Custom PCB for interfacing with the MCP3002 (experimenting with Kicad)
 
